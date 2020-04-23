@@ -47,11 +47,11 @@ router.get('/sse', async (ctx) => {
           });
         }
         if (matchArchive.length < 50) {
-          matchArchive.push(newsMessage);
           sse.sendEvent({
             data: newsMessage,
             event: currentEvent,
           });
+          matchArchive.push(newsMessage);
         } else {
           sse.sendEvent({
             data: 'match ended',
