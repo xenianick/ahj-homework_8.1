@@ -59,7 +59,7 @@ router.get('/sse', async (ctx) => {
             event: 'end',
           });
         }
-      }, 500);
+      }, 5000);
       return () => {
         clearInterval(interval);
       };
