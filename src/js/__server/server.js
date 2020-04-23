@@ -58,7 +58,7 @@ router.get('/sse', async (ctx) => {
             event: 'end',
           });
         }
-      }, 1000);
+      }, 5000);
       return () => {
         clearInterval(interval);
       };

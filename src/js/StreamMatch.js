@@ -34,7 +34,7 @@ export default class StreamMatch {
     });
   }
 
-  async getNews(container) {
+  getNews(container) {
     this.listenNews(container);
     this.restoreNews(container);
   }
