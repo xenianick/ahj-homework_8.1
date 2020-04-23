@@ -13,5 +13,4 @@ mainContainer.appendChild(widgetContainer);
 bodyEl.insertBefore(mainContainer, bodyEl.firstChild);
 
 const match = new StreamMatch('https://ahj-homework-8-1.herokuapp.com');
-match.restoreNews(newsContainer);
-match.listenNews(newsContainer);
+match.getNews(newsContainer);

@@ -33,4 +33,9 @@ export default class StreamMatch {
       addNewsCard(event.data, container, createNewsCard);
     });
   }
+
+  async getNews(container) {
+    await this.restoreNews(container);
+    this.listenNews(container);
+  }
 }
