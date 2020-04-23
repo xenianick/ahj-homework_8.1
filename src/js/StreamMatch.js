@@ -35,7 +35,7 @@ export default class StreamMatch {
   }
 
   async getNews(container) {
-    await this.restoreNews(container);
     this.listenNews(container);
+    this.restoreNews(container);
   }
 }

@@ -3,7 +3,6 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const Router = require('koa-router');
 const { streamEvents } = require('http-event-stream');
-const { getCurrentDate } = require('./getCurrentDate');
 
 const app = new Koa();
 const router = new Router();
@@ -14,7 +13,7 @@ app.use(koaBody({
   json: true,
 }));
 
-const matchArchive = [JSON.stringify({ message: 'Игра началась', date: getCurrentDate(), id: 1 })];
+const matchArchive = [JSON.stringify({ message: 'Игра началась', date: +new Date(), id: 1 })];
 
 router.get('/', async (ctx) => {
   ctx.response.body = matchArchive;
@@ -34,17 +33,17 @@ router.get('/sse', async (ctx) => {
         if (index <= 29) {
           currentEvent = 'freekick';
           newsMessage = JSON.stringify({
-            message: 'Нарушение правил, будет штрафной удар', date: getCurrentDate(), id: matchArchive.length + 1, icon: '&#8252;&#65039;',
+            message: 'Нарушение правил, будет штрафной удар', date: +new Date(), id: matchArchive.length + 1, icon: '&#8252;&#65039;',
           });
         }
         if (index >= 30 && index <= 89) {
           currentEvent = 'action';
-          newsMessage = JSON.stringify({ message: 'Идет перемещение мяча по полю, игроки и той, и другой команды активно пытаются атаковать', date: getCurrentDate(), id: matchArchive.length + 1 });
+          newsMessage = JSON.stringify({ message: 'Идет перемещение мяча по полю, игроки и той, и другой команды активно пытаются атаковать', date: +new Date(), id: matchArchive.length + 1 });
         }
         if (index >= 90) {
           currentEvent = 'goal';
           newsMessage = JSON.stringify({
-            message: 'Отличный удар, И Г-О-О-О-Л!', date: getCurrentDate(), id: matchArchive.length + 1, icon: '&#9917;',
+            message: 'Отличный удар, И Г-О-О-О-Л!', date: +new Date(), id: matchArchive.length + 1, icon: '&#9917;',
           });
         }
         if (matchArchive.length < 50) {
@@ -59,7 +58,7 @@ router.get('/sse', async (ctx) => {
             event: 'end',
           });
         }
-      }, 5000);
+      }, 1000);
       return () => {
         clearInterval(interval);
       };
